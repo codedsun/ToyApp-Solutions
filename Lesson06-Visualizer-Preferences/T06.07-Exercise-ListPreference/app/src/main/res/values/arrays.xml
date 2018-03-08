@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="pref_array_color_list_label">
+        <item name="@string/pref_color_red_name"/>
+        <item name="@string/pref_color_blue_name"/>
+        <item name="@string/pref_color_green_name"/>
+    </array>
+
+    <array name="pref_array_color_list_value">
+        <item name="@string/pref_color_red_value"/>
+        <item name="@string/pref_color_blue_value"/>
+        <item name="@string/pref_color_green_value"/>
+    </array>
+</resources>

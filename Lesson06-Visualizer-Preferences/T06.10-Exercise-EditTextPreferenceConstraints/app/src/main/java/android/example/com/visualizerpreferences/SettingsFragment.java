@@ -27,9 +27,9 @@ import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.preference.PreferenceScreen;
 import android.widget.Toast;
 
-// TODO (1) Implement OnPreferenceChangeListener
+// TOD (1) Implement OnPreferenceChangeListener
 public class SettingsFragment extends PreferenceFragmentCompat implements
-        OnSharedPreferenceChangeListener {
+        OnSharedPreferenceChangeListener, Preference.OnPreferenceChangeListener {
 
     @Override
     public void onCreatePreferences(Bundle bundle, String s) {
@@ -51,7 +51,10 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
                 setPreferenceSummary(p, value);
             }
         }
-        // TODO (3) Add the OnPreferenceChangeListener specifically to the EditTextPreference
+
+        Preference preference = getPreferenceManager().findPreference(getString(R.string.pref_size_key));
+        preference.setOnPreferenceChangeListener(this);
+        // ODO (3) Add the OnPreferenceChangeListener specifically to the EditTextPreference
     }
 
     @Override
@@ -105,5 +108,23 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
         super.onDestroy();
         getPreferenceScreen().getSharedPreferences()
                 .unregisterOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        String value = (String) newValue;  Float f;
+
+        if(value  == null || value.isEmpty()){
+            preference.setDefaultValue(Float.parseFloat(getString(R.string.pref_size_default)));
+            return true;
+        }
+        else {
+            f = Float.valueOf(value);
+            if (f > 0 && f <= 3) {
+                return true;
+            } else
+                Toast.makeText(getContext(), "Please enter correct value", Toast.LENGTH_SHORT).show();
+            return false;
+        }
     }
 }

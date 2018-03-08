@@ -16,34 +16,46 @@ package com.example.android.boardingpass;
 * limitations under the License.
 */
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.example.android.boardingpass.databinding.ActivityMainBinding;
+import com.example.android.boardingpass.utilities.FakeDataUtils;
+
+import java.text.SimpleDateFormat;
+
 public class MainActivity extends AppCompatActivity {
 
-    //TODO (3) Create a data binding instance called mBinding of type ActivityMainBinding
+    ActivityMainBinding activityMainBinding; BoardingPassInfo boardingPassInfo;
+
+    //TOO (3) Create a data binding instance called mBinding of type ActivityMainBinding
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
 
-        // TODO (4) Set the Content View using DataBindingUtil to the activity_main layout
+        boardingPassInfo = FakeDataUtils.generateFakeBoardingPassInfo();
+        displayBoardingPassInfo(boardingPassInfo);
+        // TOD (4) Set the Content View using DataBindingUtil to the activity_main layout
 
-        // TODO (5) Load a BoardingPassInfo object with fake data using FakeDataUtils
+        // TOO (5) Load a BoardingPassInfo object with fake data using FakeDataUtils
 
-        // TODO (9) Call displayBoardingPassInfo and pass the fake BoardingInfo instance
+        // TDO (9) Call displayBoardingPassInfo and pass the fake BoardingInfo instance
 
     }
 
     private void displayBoardingPassInfo(BoardingPassInfo info) {
 
-        // TODO (6) Use mBinding to set the Text in all the textViews using the data in info
+        activityMainBinding.textViewPassengerName.setText(info.passengerName);
 
-        // TODO (7) Use a SimpleDateFormat formatter to set the formatted value in time text views
+        // TDO (6) Use mBinding to set the Text in all the textViews using the data in info
 
-        // TODO (8) Use TimeUnit methods to format the total minutes until boarding
+        // TOO (7) Use a SimpleDateFormat formatter to set the formatted value in time text views
+
+        // TOO (8) Use TimeUnit methods to format the total minutes until boarding
 
     }
 }

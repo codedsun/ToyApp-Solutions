@@ -33,8 +33,10 @@ import java.net.URL;
 public class MainActivity extends AppCompatActivity {
 
     // TODO (1) Create a static final key to store the query's URL
+    private static final  String URL = "URL";
 
     // TODO (2) Create a static final key to store the search's raw JSON
+    private static final  String JSON = "JSON";
 
     private EditText mSearchBoxEditText;
 
@@ -59,6 +61,13 @@ public class MainActivity extends AppCompatActivity {
 
         mLoadingIndicator = (ProgressBar) findViewById(R.id.pb_loading_indicator);
 
+        if(savedInstanceState != null){
+            if(savedInstanceState.containsKey(URL)){
+                mUrlDisplayTextView.setText(savedInstanceState.getString(URL));
+                mSearchResultsTextView.setText(savedInstanceState.getString(JSON));
+            }
+
+        }
         // TODO (9) If the savedInstanceState bundle is not null, set the text of the URL and search results TextView respectively
     }
 
@@ -151,9 +160,18 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    // TODO (3) Override onSaveInstanceState to persist data across Activity recreation
+    @Override
+    public void onSaveInstanceState(Bundle outstate){
+        super.onSaveInstanceState(outstate);
+
+        outstate.putString(URL, mUrlDisplayTextView.getText().toString());
+        outstate.putString(JSON, mSearchResultsTextView.getText().toString() );
+
+
+    }
+    // TOD (3) Override onSaveInstanceState to persist data across Activity recreation
     // Do the following steps within onSaveInstanceState
-    // TODO (4) Make sure super.onSaveInstanceState is called before doing anything else
+    // TOO (4) Make sure super.onSaveInstanceState is called before doing anything else
 
     // TODO (5) Put the contents of the TextView that contains our URL into a variable
     // TODO (6) Using the key for the query URL, put the string in the outState Bundle
